@@ -13,8 +13,8 @@ object SparkSessionTest {
       .config("spark.hadoop.hive.exec.max.dynamic.partitions", "4000")
       .config("spark.sql.storeAssignmentPolicy", "legacy")
       .config("spark.sql.sources.partitionOverwriteMode", "dynamic")
-      .config("hive.metastore.uris", "thrift://hadoop73:9083")
-      .enableHiveSupport()
+      //      .config("hive.metastore.uris", "thrift://hadoop73:9083")
+      //      .enableHiveSupport()
       .getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     spark
@@ -22,8 +22,12 @@ object SparkSessionTest {
 
   def main(args: Array[String]): Unit = {
     val spark = initSpark()
-    val sql = "select * from sgami_bjzx_gate.a_gate_archive_new limit 2"
-    val df = spark.sql(sql)
+    import spark.implicits._
+    val schema = Seq("department", "emp_count")
+    val data = Seq(("engineering", 500), ("accounts", 100), ("sales", 1500),
+      ("marketing", 500), ("finance", 150))
+    val rdd = spark.sparkContext.parallelize(data)
+    val df = rdd.toDF(schema: _*)
     df.show()
   }
 
