@@ -4,9 +4,17 @@
   <artifactId>scala_demo</artifactId>
   <version>1.0-SNAPSHOT</version>
   <properties>
-    <scala.version>2.13.12</scala.version>
-    <spark.version>3.5.1</spark.version>
+    <scala.version>2.11.12</scala.version>
+    <spark.version>2.4.0</spark.version>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>Sonatype-public</id>
+      <name>SnakeYAML repository</name>
+      <url>http://oss.sonatype.org/content/groups/public/</url>
+    </repository>
+  </repositories>
 
   <dependencies>
     <dependency>
@@ -16,19 +24,29 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.13</artifactId>
+      <artifactId>spark-core_2.11</artifactId>
       <version>${spark.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.13</artifactId>
+      <artifactId>spark-sql_2.11</artifactId>
       <version>${spark.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-hive_2.13</artifactId>
+      <artifactId>spark-hive_2.11</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-sql-kafka-0-10_2.11</artifactId>
       <version>${spark.version}</version>
     </dependency>
   </dependencies>
